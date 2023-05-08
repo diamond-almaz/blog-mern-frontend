@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useRef } from 'react';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
@@ -22,8 +24,6 @@ export const AddPost = () => {
   const [imageUrl, setImageUrl] = React.useState('');
 
   const inputRef = useRef(null);
-
-  const isAuth = useSelector(selectIsAuth);
 
   const isEditing = Boolean(id);
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from 'react-redux';
 
 import Typography from "@mui/material/Typography";
@@ -14,7 +14,7 @@ import { Navigate } from "react-router-dom";
 export const Login = () => {
   const isAuth = useSelector(selectIsAuth);
   const dispatch = useDispatch();
-  const { register, handleSubmit, setError, formState: { errors, isValid }} = useForm({
+  const { register, handleSubmit, formState: { errors, isValid }} = useForm({
     defaultValues: {
       email: '',
       password: '',
