@@ -1,7 +1,14 @@
 import axios from 'axios';
 
+
+const devURL = 'http://localhost:4444';
+
+const prodURL = 'https://mern-blog-kosmonaf.onrender.com';
+
+export const baseURL = prodURL;
+
 const instance = axios.create({
-  baseURL: 'http://localhost:4444'
+  baseURL,
 })
 
 

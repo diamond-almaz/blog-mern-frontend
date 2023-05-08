@@ -8,7 +8,7 @@ import 'easymde/dist/easymde.min.css';
 import styles from './AddPost.module.scss';
 import { useSelector } from 'react-redux';
 import { selectIsAuth } from '../../redux/slices/auth';
-import instance from '../../api';
+import instance, { baseURL } from '../../api';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 
@@ -121,7 +121,7 @@ export const AddPost = () => {
         </Button>
       )}
       {imageUrl && (
-        <img className={styles.image} src={`http://localhost:4444${imageUrl}`} alt="Uploaded" />
+        <img className={styles.image} src={`${baseURL}${imageUrl}`} alt="Uploaded" />
       )}
       <br />
       <br />

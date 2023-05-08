@@ -10,6 +10,7 @@ import { CommentsBlock } from '../components/CommentsBlock';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPosts, fetchTags } from '../redux/slices/post';
 import { selectIsAuth } from '../redux/slices/auth';
+import { baseURL } from '../api';
 
 export const Home = () => {
   const dispatch = useDispatch();
@@ -47,7 +48,7 @@ export const Home = () => {
             <Post
               id={obj._id}
               title={obj.title}
-              imageUrl={ obj.imageUrl ? `http://localhost:4444${obj.imageUrl}` :"https://res.cloudinary.com/practicaldev/image/fetch/s--UnAfrEG8--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/icohm5g0axh9wjmu4oc3.png"}
+              imageUrl={ obj.imageUrl ? `${baseURL}${obj.imageUrl}` :"https://res.cloudinary.com/practicaldev/image/fetch/s--UnAfrEG8--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/icohm5g0axh9wjmu4oc3.png"}
               user={obj.user}
               createdAt={obj.createdAt}
               viewsCount={obj.viewsCount}
