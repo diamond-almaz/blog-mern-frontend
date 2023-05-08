@@ -1,13 +1,6 @@
 import axios from 'axios';
 
-
-const isProd = process.env.NODE_ENV !== 'production';
-
-const devURL = 'http://localhost:4444';
-
-const prodURL = 'https://mern-blog-kosmonaf.onrender.com';
-
-export const baseURL = isProd ? prodURL : devURL;
+export const baseURL = process.env.REACT_APP_API_URL;
 
 const instance = axios.create({
   baseURL,
