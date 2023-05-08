@@ -9,9 +9,11 @@ import styles from './AddPost.module.scss';
 import { useSelector } from 'react-redux';
 import { selectIsAuth } from '../../redux/slices/auth';
 import instance from '../../api';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 
 export const AddPost = () => {
+  const {id} = useParams();
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = React.useState(false );
   const [value, setValue] = React.useState('');
@@ -22,6 +24,19 @@ export const AddPost = () => {
   const inputRef = useRef(null);
 
   const isAuth = useSelector(selectIsAuth);
+
+  const isEditing = Boolean(id);
+
+  useEffect(() => {
+    if (isEditing) {
+      instance.get('/posts/' + id).then(({ data}) => {
+        setValue(data.text);
+        setTitle(data.title);
+        setTags(data.tags.join(','));
+        setImageUrl(data.imageUrl);
+      })
+    }
+  }, [])
 
 
   const handleChangeFile = async (event) => {
@@ -59,9 +74,18 @@ export const AddPost = () => {
         text: value,
       }
 
-      const { data } = await instance.post('/posts', fields);
+      let _id;
 
-      const id = data._id;
+     if (isEditing) {
+      _id = id;
+       await instance.patch('/posts/' + _id, fields);
+
+     } else {
+      const { data } = await instance.post('/posts', fields);
+       _id = data._id;
+     }
+
+
 
       navigate('/posts/' + id);
 
@@ -114,7 +138,7 @@ export const AddPost = () => {
       <SimpleMDE className={styles.editor} value={value} onChange={onChange} options={options} />
       <div className={styles.buttons}>
         <Button onClick={onSubmit} size="large" variant="contained">
-          Опубликовать
+          {isEditing ? 'Сохранить' : 'Опубликовать'}
         </Button>
         <a href="/">
           <Button size="large">Отмена</Button>
